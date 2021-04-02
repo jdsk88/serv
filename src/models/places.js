@@ -124,30 +124,5 @@ export const PLACES = mongoose.Schema({
     },
 })
 
-// Name
-// Active
-// Tags
-// Territory
-// Representative_ID
-// Representative_name
-// Time_of_last_activity
-// Street_Address
-// ZIP
-// ZIP_ext
-// City
-// State
-// Country
-// Country_code
-// Email
-// Phone
-// Mobile
-// Website
-// Contact_name
-// Contact_title
-// Note
-// Status
-// latitude
-// longitude
-
 export const Places = mongoose.model("Places", PLACES);
 

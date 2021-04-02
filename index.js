@@ -1,6 +1,4 @@
 import express from "express";
-// import fs from 'fs';
-// import https from 'https';
 import "./config/mongo.js";
 import "./config/passport.js";
 import routes from "./src/routes/index.js";
@@ -31,7 +29,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: false, sameSite: "none", httpOnly: false ,maxAge:10000},
+    cookie: { secure: false, sameSite: "none", httpOnly: false ,maxAge:150000},
   })
 );
 app.use(passport.initialize());

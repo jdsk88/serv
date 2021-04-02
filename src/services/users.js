@@ -38,7 +38,7 @@ export const logInUser = ({ username, password }) => {
   });
 };
 
-export const updateUser = ({ user }) => {};
+export const updateUser = ({ user }) => { };
 
 export const userRegisterSchema = Joi.object({
   username: Joi.string().alphanum().min(3).max(30).required(),

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+// import passportLocalMongoose from  'passport-local-mongoose';
 
 export const userSchema = mongoose.Schema({
     username: { type: String, required: true, index: { unique: true, dropDups: true } },
@@ -12,12 +13,10 @@ export const userSchema = mongoose.Schema({
     active: { type: Boolean, default: false },
     token: String
 });
-
+// userSchema.plugin(passportLocalMongoose);
 userSchema.methods.activate = function (cb) {
     this.active = true;
     return this.save();
 };
 
 export const User = mongoose.model("User", userSchema);
-
-// {"username":"jdsk88", "email":"jdsk88@gmail.com", "password":"1234admin", "avatarURL":"https://cdn1.iconfinder.com/data/icons/smileys-emoticons-outlines-with-medical-mask-inclu/96/PIRAT_SMILEY_STONER__outline-512.png"}
