@@ -58,7 +58,7 @@ users.post('/add', (req, res, next) => {
           user.save(function(err, user) {
               if(err) console.log(err);
               console.log("New user profile created");
-              res.redirect(`/api/users`);
+              res.redirect(`/api/users/me`);
           });
       }
   });
