@@ -53,7 +53,6 @@ users.post('/add', (req, res, next) => {
       if ( user){
           console.log("This user has already been saved");
       } else {
-
           var user = new User(req.body);
           user.save(function(err, user) {
               if(err) console.log(err);
