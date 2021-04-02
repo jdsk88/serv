@@ -29,28 +29,3 @@ export const LOCATIONS = mongoose.Schema(
 )
 
 export const Location = mongoose.model("Location", LOCATIONS);
-// {
-//     "name": ":string",
-//     "type": ":string",
-//     "address": {
-//         "street": ":string",
-//         "city": ":string",
-//         "country": ":string",
-//         "cords": {
-//             "longitude": 222222222,
-//             "latitude": 222222222,
-//         }
-//     },
-//     "contact": {
-//             "first_name": ":string",
-//             "last_name": ":string",
-//             "email": ":string",
-//             "phone": 222222222
-        
-//     },
-//     "invoice_data": {
-//         "nip": "{ type: String }",
-//         'full_name': "{ type: String }",
-//         "short_name": "{ type: String }",
-//         'adress': 2222222222,
-//     }}

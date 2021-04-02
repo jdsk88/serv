@@ -1,14 +1,14 @@
 import express from "express";
 import {
-  getLocation, getLocations,
-  addLocation, updateLocation, destroyLocation,
-  clearLocationsDataBase
-} from "../services/locations.js";
+  getEmployer, getEmployers,
+  addEmployer, updateEmployer, destroyEmployer,
+  clearEmployersDataBase
+} from "../services/employers.js";
 
 const routes = express.Router({});
 
 routes.get("/", async (req, res) => {
-  const result = await getLocations(
+  const result = await getEmployers(
     // {
     //   name: req.query.name,
     //   limit: parseInt(req.query.limit),
@@ -19,50 +19,50 @@ routes.get("/", async (req, res) => {
   res.send(result);
 });
 
-routes.get("/:location_id", async (req, res) => {
-  const { location_id } = req.params;
-  const result = await getLocation({ id: location_id });
+routes.get("/:Employer_id", async (req, res) => {
+  const { Employer_id } = req.params;
+  const result = await getEmployer({ id: Employer_id });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result);
 });
 
 routes.post("/", async (req, res) => {
-  const { name,type,address,contact,invoice_data,contract } = req.body;
-  const result = await addLocation({ name,type,address,contact,invoice_data,contract });
+  const { first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone] } = req.body;
+  const result = await addEmployer({ first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone] });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 
 
-routes.put("/:location_id", async (req, res) => {
-  const { location_id } = req.params
-  const { name,type,address,contact,invoice_data,contract } = req.body
-  const result = await updateLocation({
-    id: location_id, name,type,address,contact,invoice_data,contract
+routes.put("/:Employer_id", async (req, res) => {
+  const { Employer_id } = req.params
+  const { first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone] } = req.body
+  const result = await updateEmployer({
+    id: Employer_id, first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone]
 
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 
-routes.patch("/:location_id", async (req, res) => {
-  const { location_id } = req.params
-  const { name,type,address,contact,invoice_data,contract
+routes.patch("/:Employer_id", async (req, res) => {
+  const { Employer_id } = req.params
+  const { first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone]
   } = req.body
 
-  const result = await updateLocation({ id: location_id, name,type,address,contact,invoice_data,contract });
+  const result = await updateEmployer({ id: Employer_id, first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone] });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 
 routes.delete("/", async (req, res) => {
-  const result = await clearLocationsDataBase();
+  const result = await clearEmployersDataBase();
   res.send(result);
 });
 
-routes.delete("/:location_id", async (req, res) => {
-  const { location_id } = req.params;
-  const result = await destroyLocation({ location_id });
+routes.delete("/:Employer_id", async (req, res) => {
+  const { Employer_id } = req.params;
+  const result = await destroyEmployer({ Employer_id });
   res.send(result);
 });
 

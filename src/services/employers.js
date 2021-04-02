@@ -1,32 +1,21 @@
-import { Employer } from "../models/isbm/employers.js";
+import { Employer } from "../models/employers.js";
 
-export const getEmployers = async (
-    // { name, limit = 10, page = 1 }
-    ) => {
-    // const skip = (page -  .1) * limit;
-    return Employer.find({
-        // name: {
-        //     $regex: name || "",
-        //     $options: "-i",
-        // },
-    })
-        // .skip(skip)
-        // .limit(limit);
+export const getEmployers = async () => {
+    return Employer.find()
 };
-
 
 export const getEmployer = async ({ id }) => {
     return Employer.findById(id);
 };
 
-export const addEmployer = async ({first_name,last_name,username,contact,phone,address,city,country,contract,signature}) => {
-    const result = new Employer({first_name,last_name,username,contact,phone,address,city,country,contract,signature});
+export const addEmployer = async ({first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone]}) => {
+    const result = new Employer({first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone]});
     return result.save()
 }
 
-export const updateEmployer = async ({id,first_name,last_name,username,contact,phone,address,city,country,contract,signature}) => {
+export const updateEmployer = async ({id,first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone]}) => {
     const result = Employer.findById(id);
-    return result.updateOne({first_name,last_name,username,contact,phone,address,city,country,contract,signature});
+    return result.updateOne({first_name,last_name,username,contact:{email,phone,address:{street,city,country}},contract: {start_date,end_date},signature,localizations: [localization_id,localization_name,localization_adress,localization_status,localization_contact,localization_contact_phone]});
 };
 
 export const destroyEmployer = async ({employer_id}) => {
