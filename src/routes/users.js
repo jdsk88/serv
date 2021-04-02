@@ -7,6 +7,7 @@ import {
   deleteUsers,
 } from "../services/users.js";
 import passport from "passport";
+import { User } from "../models/users.js";
 
 const users = express.Router({});
 
@@ -43,6 +44,24 @@ users.post("/register", async (req, res) => {
   } catch (e) {
     res.send({ error: e.message });
   }
+});
+
+users.post('/add', (req, res, next) => {
+  let query = req.body.username;
+  User.findOne({username:query}, function(err, user){
+      if(err) console.log(err);
+      if ( user){
+          console.log("This user has already been saved");
+      } else {
+
+          var user = new User(req.body);
+          user.save(function(err, user) {
+              if(err) console.log(err);
+              console.log("New user profile created");
+              res.redirect(`/api/users`);
+          });
+      }
+  });
 });
 
 // => config/passport.js

@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 // import passportLocalMongoose from  'passport-local-mongoose';
 
 export const userSchema = mongoose.Schema({
-    username: { type: String, required: true, index: { unique: true, dropDups: true } },
-    email: { type: String, required: true, index: { unique: true, dropDups: true } },
+    username: { type: String, required: true},
+    email: { type: String, required: true},
     password: {
         type: String,
         required: true,
