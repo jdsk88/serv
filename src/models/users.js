@@ -10,7 +10,7 @@ export const userSchema = mongoose.Schema({
     },
     avatarURL: String,
     active: { type: Boolean, default: false },
-    // token: String
+    token: String
 });
 
 userSchema.methods.activate = function (cb) {
