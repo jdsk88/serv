@@ -5,11 +5,8 @@ import locations from "./locations.js";
 import products from "./products.js";
 import cart from "./cart.js";
 import category from "./category.js";
-import geolocation from "./geolocation.js";
-
 
 const routes = express.Router({});
-
 
 const HOST = process.env.HOST;
 
