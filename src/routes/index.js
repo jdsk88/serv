@@ -22,6 +22,5 @@ routes.use('/products', products)
 routes.use('/cart', cart)
 routes.use('/productsEditor', products)
 routes.use('/category', category)
-routes.use('/geolocation', geolocation)
 
 export default routes;
