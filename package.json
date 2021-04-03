@@ -22,6 +22,7 @@
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "express-session": "^1.17.1",
     "express-ws": "^4.0.0",
     "http": "0.0.1-security",
