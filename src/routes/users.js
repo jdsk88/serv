@@ -36,17 +36,7 @@ users.get("/me", async (req, res) => {
   }
 });
 
-users.post("/register", async (req, res) => {
-  try {
-    const userData = req.body;
-    const result = await registerUser({ user: userData });
-    res.send(result);
-  } catch (e) {
-    res.send({ error: e.message });
-  }
-});
-
-users.post('/add', (req, res, next) => {
+users.post('/register', (req, res, next) => {
   let query = req.body.username;
   User.findOne({username:query}, function(err, user){
       if(err) console.log(err);

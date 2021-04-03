@@ -5,6 +5,7 @@ import {
   clearProductsDataBase, getTranslatedProduct, appendProduct
 } from "../services/products.js";
 import translate from 'translate';
+import { Product } from '../models/products.js';
 translate.engine = 'google';
 translate.key = process.env.TRANSLATE_KEY;
 
@@ -47,14 +48,21 @@ routes.get(`/:product_id/:language`, async (req, res) => {
   res.send(translated_result);
 });
 
-routes.post("/", async (req, res) => {
-  const { Name, Barcode, Active, Tags, Note, Product_group_ID, Product_group, Unit_price, Images,
-  } = req.body;
-  const result = await addProduct({
-    Name, Barcode, Active, Tags, Note, Product_group_ID, Product_group, Unit_price, Images,
+routes.post('/', (req, res, next) => {
+  let query = req.body.Name;
+  Product.findOne({Name:query}, function(err, product){
+      if(err) console.log(err);
+      if ( product){
+          console.log("This product has already been saved");
+      } else {
+          var product = new Product(req.body);
+          product.save(function(err, product) {
+              if(err) console.log(err);
+              console.log("New product profile created");
+              res.redirect(`/api/products`);
+          });
+      }
   });
-  res.header("Access-Control-Allow-Origin", "*");
-  res.send(result)
 });
 
 routes.post('/file_upload', (req, res) => {
