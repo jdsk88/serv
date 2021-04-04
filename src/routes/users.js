@@ -58,6 +58,7 @@ users.post("/login", passport.authenticate("local"), function (req, res) {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
   console.log(req.body)
+  // console.log(res.header())
   res.header("Access-Control-Allow-Origin", "*");
   res.redirect("/api/users/me"); // + req.user.username);
 });
