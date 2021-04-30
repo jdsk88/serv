@@ -8,6 +8,7 @@ import {
 } from "../services/users.js";
 import passport from "passport";
 import { User } from "../models/users.js";
+import { token } from "morgan";
 
 const users = express.Router({});
 
@@ -24,17 +25,16 @@ users.delete("/", async (req, res) => {
 });
 
 users.get("/me", async (req, res) => {
-  // console.log(req.user)
   if (req.user) {
-  // res.header("Access-Control-Allow-Origin", "*");
-  res.send(await findUser({ id: req.user.id}));
-  console.log(`user logged in: ${req.user.username} and id: ${req.user.id}`)
+  res.send(await findUser({ id: req.user.id }),{token:"test123"});
+  console.log(`user logged in: ${req.user.username} and id: ${req.user.id} and token ${token}`)
   }else{
   res.header("Access-Control-Allow-Origin", "*");
   res.send({error:'Not Logged in'})
   console.log(`user not logged in`)
   }
 });
+
 
 users.post('/register', (req, res, next) => {
   let query = req.body.username;
@@ -58,8 +58,8 @@ users.post("/login", passport.authenticate("local"), function (req, res) {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
   console.log(req.body)
-  // console.log(res.header())
   res.header("Access-Control-Allow-Origin", "*");
+
   res.redirect("/api/users/me"); // + req.user.username);
 });
 

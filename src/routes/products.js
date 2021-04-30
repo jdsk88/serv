@@ -1,4 +1,5 @@
 import express from 'express'
+import { prodData } from "../../data/products.js"
 import {
   getProduct, getProducts,
   addProduct, updateProduct, destroyProduct,
@@ -21,6 +22,27 @@ routes.get("/", async (req, res) => {
     });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result);
+});
+
+routes.get("/import", async (req, res) => {
+  for(var item in prodData){
+    const Name = prodData[item].Name;
+    const Barcode = prodData[item].Barcode;
+    const Active = prodData[item].Active;
+    const Tags = prodData[item].Tags;
+    const Note = prodData[item].Note;
+    const Product_group_ID = prodData[item].Product_group_ID;
+    const Product_group = prodData[item].Product_group;
+    const Unit_price = prodData[item].Unit_price;
+    const Images = prodData[item].Images;
+    console.log(`Name: ${Name}, Barcode: ${Barcode}, Active: ${Active}, Tags: ${Tags}, Note: ${Note}, Product_group_ID: ${Product_group_ID}, Product_group: ${Product_group}, Unit_price: ${Unit_price}, Images: ${Images}`)
+    await addProduct({
+      Name, Barcode, Active, Tags, Note, Product_group_ID, Product_group, Unit_price, Images
+    });
+  }
+
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send(prodData)
 });
 
 routes.get("/:product_id", async (req, res) => {
