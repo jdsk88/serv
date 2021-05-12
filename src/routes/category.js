@@ -1,4 +1,5 @@
 import express from 'express'
+import { CATEGORY } from '../models/category.js';
 import {
   getCategory, getCategories,
   addCategory, updateCategory, destroyCategory,
@@ -27,25 +28,25 @@ routes.get("/:Category_id", async (req, res) => {
 
 
 routes.post("/", async (req, res) => {
-  const { name,link,type
+  const { name,link,type,icon
   } = req.body;
-  const result = await addCategory({name,link,type});
+  const result = await addCategory({name,link,type,icon});
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 
 routes.put("/:Category_id", async (req, res) => {
   const { Category_id } = req.params
-  const { name,link,type } = req.body
-  const result = await updateCategory({id: Category_id, name,link,type});
+  const { name,link,type,icon } = req.body
+  const result = await updateCategory({id: Category_id, name,link,type,icon});
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 // routes.post("/:Category_id", async (req, res) => {
 //   const { Category_id } = req.params
-//   const { name,link,type } = req.body
+//   const { name,link,type,icon } = req.body
 //   const result = await updateProductCard({
-//     id: Category_id, name,link,type
+//     id: Category_id, name,link,type,icon
 //   });
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.send(result)
@@ -54,12 +55,12 @@ routes.put("/:Category_id", async (req, res) => {
 
 routes.patch("/:Category_id", async (req, res) => {
   const { Category_id } = req.params
-  const { name,link,type
+  const { name,link,type,icon
 
   } = req.body
 
   const result = await updateCategory({
-    id: Category_id, name,link,type
+    id: Category_id, name,link,type,icon
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)

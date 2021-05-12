@@ -12,18 +12,18 @@ export const getCategory = async ({ id }) => {
     return Category.findById(id);
 };
 
-export const addCategory = async ({ name,link,type
+export const addCategory = async ({ name,link,type,icon
 }) => {
-    const result = new Category({name,link,type});
-    console.log(name,link,type)
+    const result = new Category({name,link,type,icon});
+    console.log(name,link,type,icon)
     return result.save()
 }
 
-export const updateCategory = async ({ id, name,link,type
+export const updateCategory = async ({ id, name,link,type,icon
 }) => {
     const result = Category.findById(id);
-    console.log(name,link,type)
-    return result.updateOne({name,link,type});
+    console.log(name,link,type,icon)
+    return result.updateOne({name,link,type,icon});
 };
 
 export const destroyCategory = async ({ Category_id }) => {
