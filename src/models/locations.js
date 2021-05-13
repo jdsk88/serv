@@ -2,29 +2,27 @@ import mongoose from "mongoose";
 
 export const LOCATIONS = mongoose.Schema(
     {
-        name: { type: String },
-        type: { type: String },
-        address: {
-            street: { type: String },
-            city: { type: String },
-            country: { type: String },
-            cords: {
-                longitude: { type: Number },
-                latitude: { type: Number },
-            }
-        },
-        contact: {
-                first_name: { type: String },
-                last_name: { type: String },
-                email: { type: String },
-                phone: { type: Number }
-        },
-        invoice_data: {
-            nip: { type: String },
-            full_name: { type: String },
-            short_name: { type: String },
-            adress: { type: Number },
-        },
+        Name:String,
+        Active:String,
+        Tags:String,
+        Territory:String,
+        Representative_ID:String,
+        Representative_name:String,
+        Time_of_last_activity:String,
+        Street_Address:String,
+        ZIP_ext:String,
+        City:String,
+        Country:String,
+        Country_code:String,
+        Phone:String,
+        Mobile:String,
+        Website:String,
+        Contact_name:String,
+        Contact_title:String,
+        Note:String,
+        Status:String,
+        latitude:String,
+        longitude:String,
     }
 )
 

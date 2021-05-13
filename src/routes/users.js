@@ -8,7 +8,7 @@ import {
 } from "../services/users.js";
 import passport from "passport";
 import { User } from "../models/users.js";
-import { token } from "morgan";
+import  token  from "morgan";
 
 const users = express.Router({});
 
