@@ -53,7 +53,6 @@ const HOST = process.env.HOST;
 
 app.listen(PORT, HOST, () => {
   console.log(`Listening on http://${HOST}:${PORT}/`);
-  
 });
 
 export default routes;
