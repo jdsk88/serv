@@ -25,6 +25,13 @@ routes.get("/:cart_id", async (req, res) => {
   res.send(result);
 });
 
+routes.patch("/:cart_id", async (req, res) => {
+  const { cart_id } = req.params
+  const { products,client,seller,total_price } = req.body
+  const result = await updateCart({id: cart_id, products,client,seller,total_price});
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send(result)
+});
 
 routes.post("/", async (req, res) => {
   const { products,client,seller,total_price

@@ -50,9 +50,13 @@ app.get("/", (req, res) => {
 app.use("/api/", routes);
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
-
+const PORT2 = process.env.PORT2;
+const HOST2 = process.env.HOST2;
 app.listen(PORT, HOST, () => {
   console.log(`Listening on http://${HOST}:${PORT}/`);
+});
+app.listen(PORT2, HOST2, () => {
+  console.log(`Listening on http://${HOST2}:${PORT2}/`);
 });
 
 export default routes;
