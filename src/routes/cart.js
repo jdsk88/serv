@@ -3,17 +3,13 @@ import {
   getCart, getCarts,
   addCart, updateCart, destroyCart,
   clearCartsDataBase,
-  // updateProductCard,
+  updateProductInCart,
 } from "../services/cart.js";
 
 const routes = express.Router({});
 
 routes.get("/", async (req, res) => {
-  const result = await getCarts(
-    {
-      limit: parseInt(req.query.limit),
-      page: parseInt(req.query.page),
-    });
+  const result = await getCarts();
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result);
 });
@@ -59,14 +55,29 @@ routes.put("/:cart_id", async (req, res) => {
 // });
 
 
-routes.patch("/:cart_id", async (req, res) => {
-  const { cart_id } = req.params
+routes.patch("/", async (req, res) => {
+  // const { cart_id } = req.params
   const { products,client,seller,total_price
 
   } = req.body
 
   const result = await updateCart({
-    id: cart_id, products,client,seller,total_price
+    // id: cart_id,
+     products,client,seller,total_price
+  });
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send(result)
+});
+
+routes.patch("/:product_id", async (req, res) => {
+  const { product_id } = req.params
+  const { products,client,seller,total_price
+
+  } = req.body
+
+  const result = await updateProductInCart({
+    id: product_id,
+     products,client,seller,total_price
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)

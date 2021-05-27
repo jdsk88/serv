@@ -12,11 +12,11 @@ const routes = express.Router({});
 
 routes.get("/", async (req, res) => {
   const result = await getLocations(
-    // {
-    //   name: req.query.name,
-    //   limit: parseInt(req.query.limit),
-    //   page: parseInt(req.query.page),
-    // }
+    {
+      name: req.query.name,
+      limit: parseInt(req.query.limit),
+      page: parseInt(req.query.page),
+    }
   );
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result);

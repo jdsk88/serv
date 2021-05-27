@@ -8,3 +8,4 @@ export const CART = mongoose.Schema({
 })
 
 export const Cart = mongoose.model("Cart", CART);
+
