@@ -5,6 +5,7 @@ import locations from "./locations.js";
 import products from "./products.js";
 import cart from "./cart.js";
 import category from "./category.js";
+import roads from "./roads.js";
 
 
 const routes = express.Router({});
@@ -23,5 +24,6 @@ routes.use('/products', products)
 routes.use('/cart', cart)
 routes.use('/productsEditor', products)
 routes.use('/category', category)
+routes.use('/roads', roads)
 
 export default routes;

@@ -1,14 +1,18 @@
 import { Location } from "../models/locations.js";
 
 export const getLocations = async (
-    // { name, limit = 10, page = 1 }
+    {Name,City,  limit = 10, page = 1 }
 ) => {
     // const skip = (page -  .1) * limit;
     return Location.find({
-        // name: {
-        //     $regex: name || "",
-        //     $options: "-i",
-        // },
+        Name: {
+            $regex: Name || "",
+            $options: "-i",
+        },
+        City: {
+            $regex: City || "",
+            $options: "-i",
+        },
     })
     // .skip(skip)
     // .limit(limit);

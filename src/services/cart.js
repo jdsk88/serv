@@ -2,34 +2,34 @@
 import { Cart } from "../models/cart.js";
 
 export const getCarts = async () => {
-    return Cart.findOne()
+    return Cart.find()
 };
 
 export const getCart = async ({ id }) => {
     return Cart.findById(id);
 };
 
-export const addCart = async ({ products,client,seller,total_price
+export const addCart = async ({ product_id,product_price,product_name,product_image,quantity,total_price
 }) => {
-    const result = new Cart({products,client,seller,total_price});
-    console.log(products,client,seller,total_price)
+    const result = new Cart({product_id,product_price,product_name,product_image,quantity,total_price});
+    console.log(product_id,product_price,product_name,product_image,quantity,total_price)
     return result.save()
 }
 
 export const updateCart = async ({ 
     // id, 
-    products,client,seller,total_price
+    product_id,product_price,product_name,product_image,quantity,total_price
 }) => {
     const result = Cart.findOne();
-    // console.log(products,client,seller,total_price)
-    return result.updateOne({client,seller,total_price,$push:{products}});
+    // console.log(product_id,product_price,product_name,product_image,quantity,total_price)
+    return result.updateOne({product_id,product_price,product_name,product_image,quantity,total_price});
 };
 
-export const updateProductInCart = async ({ id, products,client,seller,total_price
+export const updateProductInCart = async ({ id, product_id,product_price,product_name,product_image,quantity,total_price
 }) => {
     const result = Cart.findById(id);
-    // console.log(products,client,seller,total_price)
-    return result.updateOne({client,seller,total_price,$push:{products}});
+    // console.log(product_id,product_price,product_name,product_image,quantity,total_price)
+    return result.updateOne({product_id,product_price,product_name,product_image,quantity,total_price});
 };
 
 
@@ -47,3 +47,10 @@ export const getTranslatedCart = async ({ id }) => {
     return Cart.findById(id)
 };
 
+
+// const cart = {
+// "product_price":"product_price",
+// "product_name":"product_name",
+// "product_image":"product_image",
+// "quantity":2,
+// "total_price":190}

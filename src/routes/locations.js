@@ -7,13 +7,13 @@ import {
   clearLocationsDataBase
 } from "../services/locations.js";
 
-
 const routes = express.Router({});
 
 routes.get("/", async (req, res) => {
   const result = await getLocations(
     {
-      name: req.query.name,
+      Name: req.query.Name,
+      City: req.query.City,
       limit: parseInt(req.query.limit),
       page: parseInt(req.query.page),
     }

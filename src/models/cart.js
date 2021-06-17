@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
 export const CART = mongoose.Schema({
-  client: { type: String },
-  seller: { type: String },
-  total_price: Number,
-  total_discount: Number,
-  products: [{ _id: false, product_id: String, product_price: Number, product_name: String, quantity: Number, total_price: Number }],
-})
+  // _id: false,
+  product_id: String,
+  product_price: Number,
+  product_name: String,
+  product_image: String,
+  quantity: Number,
+  total_price: Number
+},
+)
 
 export const Cart = mongoose.model("Cart", CART);
 
+// product_id,product_price,product_name,product_image,quantity,total_price

@@ -58,19 +58,17 @@ const HOST2 = process.env.HOST2;
 
 
 
-// app.listen(PORT, HOST, () => {
-//   console.log(`Listening on http://${HOST}:${PORT}/`);
-// });
-// app.listen(PORT2, HOST2, () => {
-//   console.log(`Listening on http://${HOST2}:${PORT2}/`);
-// });
+ 
+app.listen(PORT2, HOST2, () => {
+  console.log(`Listening on http://${HOST2}:${PORT2}/`);
+});
 
-var httpsServer = https.createServer({
-  key: fs.readFileSync('./key.pem'),
-  cert: fs.readFileSync('./cert.pem'),
+// var httpsServer = https.createServer({
+//   key: fs.readFileSync('./key.pem'),
+//   cert: fs.readFileSync('./cert.pem'),
   
-  passphrase: 'admin'
-}, app)
-httpsServer.listen(process.env.PORT3);
+//   passphrase: 'admin'
+// }, app)
+// httpsServer.listen(process.env.PORT3);
 
 export default routes;

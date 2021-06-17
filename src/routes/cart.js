@@ -1,10 +1,12 @@
 import express from 'express'
+import { Cart } from '../models/cart.js';
 import {
   getCart, getCarts,
   addCart, updateCart, destroyCart,
   clearCartsDataBase,
   updateProductInCart,
 } from "../services/cart.js";
+
 
 const routes = express.Router({});
 
@@ -23,32 +25,49 @@ routes.get("/:cart_id", async (req, res) => {
 
 routes.patch("/:cart_id", async (req, res) => {
   const { cart_id } = req.params
-  const { products,client,seller,total_price } = req.body
-  const result = await updateCart({id: cart_id, products,client,seller,total_price});
+  const { product_id,product_price,product_name,product_image,quantity,total_price } = req.body
+  const result = await updateCart({id: cart_id,  product_id,product_price,product_name,product_image,quantity,total_price});
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 
-routes.post("/", async (req, res) => {
-  const { products,client,seller,total_price
-  } = req.body;
-  const result = await addCart({products,client,seller,total_price});
-  res.header("Access-Control-Allow-Origin", "*");
-  res.send(result)
+routes.post('/', (req, res, next) => {
+  let query = req.body.product_id;
+  Cart.findOne({product_id:query}, function(err, item){
+      if(err) console.log(err);
+      if (item){
+          console.log("This item is already in cart");
+          updateCart(item);
+      } else {
+          var item = new Cart(req.body);
+          item.save(function(err, user) {
+              if(err) console.log(err);
+              console.log("New item added to cart")
+          });
+      }
+  });
 });
+
+// routes.post("/", async (req, res) => {
+//   const {  product_id,product_price,product_name,product_image,quantity,total_price
+//   } = req.body;
+//   const result = await addCart({ product_id,product_price,product_name,product_image,quantity,total_price});
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.send(result)
+// });
 
 routes.put("/:cart_id", async (req, res) => {
   const { cart_id } = req.params
-  const { products,client,seller,total_price } = req.body
-  const result = await updateCart({id: cart_id, products,client,seller,total_price});
+  const {  product_id,product_price,product_name,product_image,quantity,total_price } = req.body
+  const result = await updateCart({id: cart_id,  product_id,product_price,product_name,product_image,quantity,total_price});
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 // routes.post("/:cart_id", async (req, res) => {
 //   const { cart_id } = req.params
-//   const { products,client,seller,total_price } = req.body
+//   const {  product_id,product_price,product_name,product_image,quantity,total_price } = req.body
 //   const result = await updateProductCard({
-//     id: cart_id, products,client,seller,total_price
+//     id: cart_id,  product_id,product_price,product_name,product_image,quantity,total_price
 //   });
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.send(result)
@@ -57,13 +76,13 @@ routes.put("/:cart_id", async (req, res) => {
 
 routes.patch("/", async (req, res) => {
   // const { cart_id } = req.params
-  const { products,client,seller,total_price
+  const {  product_id,product_price,product_name,product_image,quantity,total_price
 
   } = req.body
 
   const result = await updateCart({
     // id: cart_id,
-     products,client,seller,total_price
+      product_id,product_price,product_name,product_image,quantity,total_price
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
@@ -71,13 +90,13 @@ routes.patch("/", async (req, res) => {
 
 routes.patch("/:product_id", async (req, res) => {
   const { product_id } = req.params
-  const { products,client,seller,total_price
+  const { product_price,product_name,product_image,quantity,total_price
 
   } = req.body
 
   const result = await updateProductInCart({
     id: product_id,
-     products,client,seller,total_price
+      product_price,product_name,product_image,quantity,total_price
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
