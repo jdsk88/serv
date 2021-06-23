@@ -21,6 +21,7 @@ export const updateCart = async ({
     product_id,product_price,product_name,product_image,quantity,total_price
 }) => {
     const result = Cart.findOne();
+    console.log("updateCart")
     // console.log(product_id,product_price,product_name,product_image,quantity,total_price)
     return result.updateOne({product_id,product_price,product_name,product_image,quantity,total_price});
 };
@@ -28,7 +29,7 @@ export const updateCart = async ({
 export const updateProductInCart = async ({ id, product_id,product_price,product_name,product_image,quantity,total_price
 }) => {
     const result = Cart.findById(id);
-    // console.log(product_id,product_price,product_name,product_image,quantity,total_price)
+    console.log(id,product_id,product_price,product_name,product_image,quantity,total_price)
     return result.updateOne({product_id,product_price,product_name,product_image,quantity,total_price});
 };
 

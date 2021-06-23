@@ -23,21 +23,24 @@ routes.get("/:cart_id", async (req, res) => {
   res.send(result);
 });
 
-routes.patch("/:cart_id", async (req, res) => {
-  const { cart_id } = req.params
-  const { product_id,product_price,product_name,product_image,quantity,total_price } = req.body
-  const result = await updateCart({id: cart_id,  product_id,product_price,product_name,product_image,quantity,total_price});
-  res.header("Access-Control-Allow-Origin", "*");
-  res.send(result)
-});
+// routes.patch("/:cart_id", async (req, res) => {
+//   const { cart_id } = req.params
+//   const { product_id,product_price,product_name,product_image,quantity,total_price } = req.body
+//   const result = await updateCart({id: cart_id,  product_id,product_price,product_name,product_image,quantity,total_price});
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.send(result)
+// });
 
 routes.post('/', (req, res, next) => {
   let query = req.body.product_id;
   Cart.findOne({product_id:query}, function(err, item){
+    console.log("query",query)
+    console.log("item",item)
       if(err) console.log(err);
-      if (item){
+      if (item === query){
           console.log("This item is already in cart");
-          updateCart(item);
+          updateCart(item)
+          // Cart.updateOne({product_id:query});
       } else {
           var item = new Cart(req.body);
           item.save(function(err, user) {
@@ -63,6 +66,7 @@ routes.put("/:cart_id", async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
+
 // routes.post("/:cart_id", async (req, res) => {
 //   const { cart_id } = req.params
 //   const {  product_id,product_price,product_name,product_image,quantity,total_price } = req.body
@@ -93,7 +97,7 @@ routes.patch("/:product_id", async (req, res) => {
   const { product_price,product_name,product_image,quantity,total_price
 
   } = req.body
-
+ 
   const result = await updateProductInCart({
     id: product_id,
       product_price,product_name,product_image,quantity,total_price
