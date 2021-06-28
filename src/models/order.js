@@ -6,6 +6,7 @@ export const ORDER = mongoose.Schema({
   total_discount: Number,
   status: String,
   products:Array,
+  date: String ,
 })
 
 export const Order = mongoose.model("Order", ORDER);

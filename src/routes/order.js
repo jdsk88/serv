@@ -22,16 +22,16 @@ routes.get("/:order_id", async (req, res) => {
   res.send(result);
 });
 routes.post("/", async (req, res) => {
-  const {client,seller,total_price,total_discount,status,products} = req.body;
-  const result = await addOrder({client,seller,total_price,total_discount,status,products});
+  const {client,seller,total_price,total_discount,status,products,date} = req.body;
+  const result = await addOrder({client,seller,total_price,total_discount,status,products,date});
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
 
 routes.put("/:order_id", async (req, res) => {
   const { order_id } = req.params
-  const {  client,seller,total_price,total_discount,status,products } = req.body
-  const result = await updateOrder({id: order_id,  client,seller,total_price,total_discount,status,products});
+  const {  client,seller,total_price,total_discount,status,products,date } = req.body
+  const result = await updateOrder({id: order_id,  client,seller,total_price,total_discount,status,products,date});
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
@@ -39,13 +39,13 @@ routes.put("/:order_id", async (req, res) => {
 
 routes.patch("/", async (req, res) => {
   // const { Order_id } = req.params
-  const {  client,seller,total_price,total_discount,status,products
+  const {  client,seller,total_price,total_discount,status,products,date
 
   } = req.body
 
   const result = await updateOrder({
     // id: Order_id,
-      client,seller,total_price,total_discount,status,products
+      client,seller,total_price,total_discount,status,products,date
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
@@ -53,13 +53,13 @@ routes.patch("/", async (req, res) => {
 
 routes.patch("/:product_id", async (req, res) => {
   const { product_id } = req.params
-  const { client,seller,total_price,total_discount,status,products
+  const { client,seller,total_price,total_discount,status,products,date
 
   } = req.body
  
   const result = await updateProductInOrder({
     id: product_id,
-    client,seller,total_price,total_discount,status,products
+    client,seller,total_price,total_discount,status,products,date
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)

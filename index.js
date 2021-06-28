@@ -58,15 +58,15 @@ app.get("/", (req, res) => {
 app.use("/api/", routes);
 // const PORT = process.env.PORT;
 // const HOST = process.env.HOST;
-// const PORT2 = process.env.PORT2;
-// const HOST2 = process.env.HOST2;
+const PORT2 = process.env.PORT2;
+const HOST2 = process.env.HOST2;
 
 
 
  
-// app.listen(PORT2, HOST2, () => {
-//   console.log(`Listening on http://${HOST2}:${PORT2}/`);
-// });
+app.listen(PORT2, HOST2, () => {
+  console.log(`Listening on http://${HOST2}:${PORT2}/`);
+});
 
 var httpsServer = https.createServer({
   key: fs.readFileSync('./.cert/ister.pl+5-key.pem'),
