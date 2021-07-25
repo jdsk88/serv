@@ -7,6 +7,12 @@ import cart from "./cart.js";
 import category from "./category.js";
 import roads from "./roads.js";
 import order from "./order.js";
+import search from "./search.js";
+import fileSystem from "./fileSystem.js";
+import { getProducts } from "../services/products.js";
+import { getOrders } from "../services/order.js";
+import { getLocations } from "../services/locations.js";
+import { getCarts } from "../services/cart.js";
 
 
 const routes = express.Router({});
@@ -27,5 +33,7 @@ routes.use('/productsEditor', products)
 routes.use('/category', category)
 routes.use('/roads', roads)
 routes.use('/order', order)
+routes.use('/search', search)
+routes.use('/fileSystem', fileSystem)
 
 export default routes;

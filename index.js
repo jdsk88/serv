@@ -49,31 +49,31 @@ app.use(
   })
 );
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("iSter Smart Server!");
 });
 
 app.use("/api/", routes);
-// const PORT = process.env.PORT;
-// const HOST = process.env.HOST;
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
 const PORT2 = process.env.PORT2;
 const HOST2 = process.env.HOST2;
 
 
 
  
-app.listen(PORT2, HOST2, () => {
-  console.log(`Listening on http://${HOST2}:${PORT2}/`);
+app.listen(PORT2, HOST, () => {
+  console.log(`Listening on http://${HOST}:${PORT2}/`);
 });
 
-var httpsServer = https.createServer({
-  key: fs.readFileSync('./.cert/ister.pl+5-key.pem'),
-  cert: fs.readFileSync('./.cert/ister.pl+5.pem'),
+// var httpsServer = https.createServer({
+//   key: fs.readFileSync('./.cert/ister.pl+5-key.pem'),
+//   cert: fs.readFileSync('./.cert/ister.pl+5.pem'),
   
-  passphrase: 'admin'
-}, app)
-httpsServer.listen(process.env.PORT3);
+//   passphrase: 'admin'
+// }, app)
+// httpsServer.listen(process.env.PORT3);
 
 export default routes;

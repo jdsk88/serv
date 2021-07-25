@@ -1,11 +1,12 @@
 import express from 'express'
+import {deleteFile,createFile,updateFile,ReadFile} from "../services/fileSystem.js"
+import { mailer } from '../services/mailer/index.js';
 import {
   getOrder, getOrders,
   addOrder, updateOrder, destroyOrder,
   clearOrdersDataBase,
   updateProductInOrder,
 } from "../services/order.js";
-
 
 const routes = express.Router({});
 
@@ -21,17 +22,43 @@ routes.get("/:order_id", async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result);
 });
+
+
+
+// MAKING ORDER
+https://github.com/jdsk88/drugsDB/blob/master/src/routes/in.old.js
 routes.post("/", async (req, res) => {
-  const {client,seller,total_price,total_discount,status,products,date} = req.body;
-  const result = await addOrder({client,seller,total_price,total_discount,status,products,date});
+  const { client, seller, total_price, total_discount, status, products, date } = req.body;
+  const result = await addOrder({ client, seller, total_price, total_discount, status, products, date });
+
+  console.log("order post : ", products)
+
+  // const renderer = (data) => Object.keys(data).map(key => {
+  //   Object.keys(data[key]).map(item => {
+  //     // console.log(`${data[key][item].product_name}: `, data[key][item])
+  //     const html = {
+  //       orderedProduct_id: data[key][item]._id,
+  //       orderedProductProduct_id: data[key][item].product_id,
+  //       orderedProductProduct_name: data[key][item].product_name,
+  //       orderedProductQuantity: data[key][item].quantity,
+  //       orderedProductProduct_price: data[key][item].product_price,
+  //       orderedProductTotal_price: data[key][item].total_price
+  //     }
+  //     // console.log(html)
+  //   })
+  //   return data
+  // });
+  // renderer(products);
+
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
+  // mailer('jdsk88@gmail.com', date, "html" )
 });
 
 routes.put("/:order_id", async (req, res) => {
   const { order_id } = req.params
-  const {  client,seller,total_price,total_discount,status,products,date } = req.body
-  const result = await updateOrder({id: order_id,  client,seller,total_price,total_discount,status,products,date});
+  const { client, seller, total_price, total_discount, status, products, date } = req.body
+  const result = await updateOrder({ id: order_id, client, seller, total_price, total_discount, status, products, date });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
 });
@@ -39,13 +66,13 @@ routes.put("/:order_id", async (req, res) => {
 
 routes.patch("/", async (req, res) => {
   // const { Order_id } = req.params
-  const {  client,seller,total_price,total_discount,status,products,date
+  const { client, seller, total_price, total_discount, status, products, date
 
   } = req.body
 
   const result = await updateOrder({
     // id: Order_id,
-      client,seller,total_price,total_discount,status,products,date
+    client, seller, total_price, total_discount, status, products, date
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
@@ -53,13 +80,13 @@ routes.patch("/", async (req, res) => {
 
 routes.patch("/:product_id", async (req, res) => {
   const { product_id } = req.params
-  const { client,seller,total_price,total_discount,status,products,date
+  const { client, seller, total_price, total_discount, status, products, date
 
   } = req.body
- 
+
   const result = await updateProductInOrder({
     id: product_id,
-    client,seller,total_price,total_discount,status,products,date
+    client, seller, total_price, total_discount, status, products, date
   });
   res.header("Access-Control-Allow-Origin", "*");
   res.send(result)
