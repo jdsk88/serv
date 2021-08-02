@@ -21,9 +21,9 @@ const corsOptions ={
 const app = express();
 app.use(errorhandler());
 app.use(cors(corsOptions));
-app.use(express.static(path.join(__dirname,"..","front")))
+app.use(express.static(path.join(__dirname,"..","build")))
 app.use('/api',function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", `https://localhost:3000/`);
+  res.header("Access-Control-Allow-Origin", `https://192.168.0.19:8989/`);
   res.setHeader("Content-Type", "application/json");
   res.header(
     "Access-Control-Allow-Headers",
@@ -55,10 +55,8 @@ const PORT2 = process.env.PORT2;
 const HOST2 = process.env.HOST2;
 
 var httpsServer = https.createServer({
-  key: fs.readFileSync('./.cert/ister.pl+5-key.pem'),
-  cert: fs.readFileSync('./.cert/ister.pl+5.pem'),
-  
-  passphrase: 'admin'
+  key: fs.readFileSync('./.cert/all-key.pem'),
+  cert: fs.readFileSync('./.cert/all.pem'),
 }, app)
 httpsServer.listen(process.env.PORT2);
   console.log(`Listening on https://${HOST}:${PORT2}/`);
